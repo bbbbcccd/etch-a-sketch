@@ -18,7 +18,9 @@ function createGrid(n) {
 // Create 16 x 16 grid by default 
 document.addEventListener("DOMContentLoaded", () => {
     createGrid(16);
+
+    let cells = document.querySelectorAll(".grid-cell");
+    cells.forEach((cell) => {
+        cell.addEventListener("mouseover", (e) => e.target.style.backgroundColor = "black");
+    })
 });
-
-
-
