@@ -1,17 +1,24 @@
+const gridContainer = document.querySelector('.grid-container');
 // takes no. of grid cells per side, n
-// returns HTML of n x n sized grid 
+// Creates a n x n sized grid
 function createGrid(n) {
     let gridHTML = "";
     for (let i = 0; i < n; i++) {
-        gridHTML += '<div class="grid-row">'
+        let row = document.createElement('div');
+        row.classList.add("grid-row");
         for (let j = 0; j < n; j++) {
-            gridHTML += '<div class="grid-cell"></div>'; 
+            let cell = document.createElement('div');
+            cell.classList.add("grid-cell");
+            row.appendChild(cell);
         }
-        gridHTML += '</div>';
+        gridContainer.appendChild(row);
     }
-    return gridHTML;
 }
 
+// Create 16 x 16 grid by default 
 document.addEventListener("DOMContentLoaded", () => {
-    document.querySelector(".grid-container").innerHTML = createGrid(16);
+    createGrid(16);
 });
+
+
+
