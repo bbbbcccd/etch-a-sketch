@@ -15,12 +15,31 @@ function createGrid(n) {
     }
 }
 
+// Set the hover effect on grid cells
+function setHover(HTMLCollection) {
+    for (let i = 0; i < HTMLCollection.length; i++) {
+        HTMLCollection[i].addEventListener("mouseover", (e) => e.target.style.backgroundColor = "black");
+    }
+}
+
+function updateSliderText(cellsEachSide) {
+    const sliderText = document.getElementById("slider-text");
+    sliderText.textContent = "Cells: " + slider.value + " x " + slider.value;
+}
+
 // Create 16 x 16 grid by default 
 document.addEventListener("DOMContentLoaded", () => {
     createGrid(16);
 
-    let cells = document.querySelectorAll(".grid-cell");
-    cells.forEach((cell) => {
-        cell.addEventListener("mouseover", (e) => e.target.style.backgroundColor = "black");
-    })
+    let cells = document.getElementsByClassName("grid-cell");
+    setHover(cells);    
+   
+    const slider = document.getElementById("slider");
+    updateSliderText(slider.value);
+    slider.addEventListener('input', () => {
+        gridContainer.replaceChildren();
+        createGrid(parseInt(slider.value));
+        updateSliderText(slider.value);
+        setHover(cells);
+    });
 });
